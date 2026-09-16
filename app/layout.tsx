@@ -73,11 +73,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="min-h-full bg-paper text-ink"
         suppressHydrationWarning
       >
-        {/* Écran logo dès le HTML — retiré par React après hydratation */}
+        {/* Écran logo dès le HTML — masqué en CSS, jamais retiré du DOM */}
         <div
           id="boot-splash"
           className="fixed inset-0 z-[100] flex items-center justify-center bg-paper"
           aria-hidden="true"
+          suppressHydrationWarning
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

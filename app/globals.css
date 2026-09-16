@@ -151,9 +151,11 @@ body::after {
   animation: splash-breathe 2.8s ease-in-out infinite;
 }
 
-/* Déjà vu : masquer le splash HTML avant React */
-html.splash-seen #boot-splash {
+/* Déjà vu / prise en charge React : masquer le splash HTML sans le retirer du DOM */
+html.splash-seen #boot-splash,
+html.splash-handoff #boot-splash {
   display: none !important;
+  pointer-events: none !important;
 }
 
 @keyframes hero-slide-in {

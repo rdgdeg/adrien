@@ -31,8 +31,15 @@ export function useSplash() {
   return useContext(SplashContext);
 }
 
-function removeBootSplash() {
-  document.getElementById("boot-splash")?.remove();
+/** Masque le splash HTML via CSS — ne jamais le retirer du DOM (React le gère). */
+function hideBootSplashWithCss(mode: "seen" | "handoff") {
+  const root = document.documentElement;
+  if (mode === "seen") {
+    root.classList.add("splash-seen");
+    root.classList.remove("splash-handoff");
+  } else {
+    root.classList.add("splash-handoff");
+  }
 }
 
 export function SplashProvider({ children }: { children: ReactNode }) {
@@ -48,9 +55,8 @@ export function SplashProvider({ children }: { children: ReactNode }) {
 
   const finish = useCallback(() => {
     localStorage.setItem(SPLASH_STORAGE_KEY, "1");
-    document.documentElement.classList.add("splash-seen");
+    hideBootSplashWithCss("seen");
     document.body.style.overflow = "";
-    removeBootSplash();
     setActive(false);
     setReady(true);
   }, []);
@@ -61,16 +67,15 @@ export function SplashProvider({ children }: { children: ReactNode }) {
       document.documentElement.classList.contains("splash-seen");
 
     if (alreadySeen) {
-      document.documentElement.classList.add("splash-seen");
+      hideBootSplashWithCss("seen");
       document.body.style.overflow = "";
-      removeBootSplash();
       setActive(false);
       setReady(true);
       return;
     }
 
-    // React prend le relais : un seul overlay, plus de double couche
-    removeBootSplash();
+    // React affiche son overlay : on masque le boot splash en CSS uniquement
+    hideBootSplashWithCss("handoff");
     document.body.style.overflow = "hidden";
 
     let finished = false;
