@@ -95,31 +95,33 @@ export function HomeHeroSlider() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center gap-3">
-          {slides.map((_, i) => (
-            <button
-              key={homeHeroSlideImages[i]}
-              type="button"
-              aria-label={`${t.home.heroCarouselLabel} ${i + 1}`}
-              aria-current={i === index ? "true" : undefined}
-              onClick={() => go(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === index
-                  ? "w-8 bg-white"
-                  : "w-2 bg-white/45 hover:bg-white/70"
-              }`}
-            />
-          ))}
+        <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-5">
+          <div className="flex items-center justify-center gap-3">
+            {slides.map((_, i) => (
+              <button
+                key={homeHeroSlideImages[i]}
+                type="button"
+                aria-label={`${t.home.heroCarouselLabel} ${i + 1}`}
+                aria-current={i === index ? "true" : undefined}
+                onClick={() => go(i)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === index
+                    ? "w-8 bg-white"
+                    : "w-2 bg-white/45 hover:bg-white/70"
+                }`}
+              />
+            ))}
+          </div>
+          <a
+            href="#home-content"
+            className="text-center font-sans text-[11px] font-medium uppercase tracking-nav text-white/85 transition-colors hover:text-white"
+          >
+            <span className="block">{t.ui.discoverSite}</span>
+            <span className="mt-1 block animate-bounce text-lg leading-none">
+              ↓
+            </span>
+          </a>
         </div>
-        <a
-          href="#home-content"
-          className="absolute bottom-20 left-1/2 -translate-x-1/2 text-center font-sans text-[11px] font-medium uppercase tracking-nav text-white/85 transition-colors hover:text-white"
-        >
-          <span className="block">{t.ui.discoverSite}</span>
-          <span className="mt-1 block animate-bounce text-lg leading-none">
-            ↓
-          </span>
-        </a>
       </div>
     </section>
   );
