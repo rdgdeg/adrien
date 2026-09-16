@@ -148,6 +148,12 @@ body::after {
   animation: splash-breathe 2.8s ease-in-out infinite;
 }
 
+/* Visiteurs déjà venus : pas de flash splash avant hydratation */
+html.splash-seen [data-splash-root],
+html.splash-done #boot-splash {
+  display: none !important;
+}
+
 @keyframes hero-slide-in {
   from {
     opacity: 0;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLocale } from "@/lib/i18n/locale-context";
 import { localizePath } from "@/lib/i18n/config";
+import { useSplash } from "@/components/Splash";
 
 const STORAGE_KEY = "degavre-cookies";
 
@@ -14,26 +15,31 @@ type Consent = {
 };
 
 export function CookieBanner() {
-  const [visible, setVisible] = useState(false);
+  const [consentNeeded, setConsentNeeded] = useState(false);
   const [customize, setCustomize] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
   const { locale, t } = useLocale();
+  const { ready: splashReady } = useSplash();
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) setVisible(true);
+    if (!saved) setConsentNeeded(true);
   }, []);
 
   function save(consent: Consent) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
-    setVisible(false);
+    setConsentNeeded(false);
   }
 
-  if (!visible) return null;
+  // Pas de cookies pendant le splash ; uniquement une fois le site révélé
+  if (!splashReady || !consentNeeded) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 z-[90] w-[min(100%-2rem,420px)] border border-line bg-paper p-5 shadow-2xl animate-fade-up">
+    <div
+      data-cookie-banner
+      className="fixed bottom-4 left-4 z-[90] w-[min(100%-2rem,420px)] border border-line bg-paper p-5 shadow-2xl animate-fade-up"
+    >
       <p className="text-[13px] font-semibold uppercase tracking-nav">
         {t.cookies.title}
       </p>

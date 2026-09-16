@@ -5,7 +5,6 @@ import { RightRail } from "@/components/RightRail";
 import { Providers } from "@/components/Providers";
 import { CookieBanner } from "@/components/CookieBanner";
 import { LegalBanner } from "@/components/LegalBanner";
-import { Splash } from "@/components/Splash";
 import { HtmlLang } from "@/components/HtmlLang";
 import { LocaleProvider } from "@/lib/i18n/locale-context";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -37,7 +36,6 @@ export default async function LocaleLayout({
         >
           {t.ui.skipToContent}
         </a>
-        <Splash />
         <Header />
         <RightRail />
         <div id="contenu" className="pb-16 md:pb-14">
