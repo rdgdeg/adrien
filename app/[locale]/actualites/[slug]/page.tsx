@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { news } from "@/lib/content";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { isLocale, localizePath, type Locale } from "@/lib/i18n/config";
 
 export function generateStaticParams() {
   return news.map((item) => ({ slug: item.slug }));
@@ -10,7 +12,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
   const { slug } = await params;
   const item = news.find((article) => article.slug === slug);
@@ -21,9 +23,12 @@ export async function generateMetadata({
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale: raw, slug } = await params;
+  if (!isLocale(raw)) notFound();
+  const locale = raw as Locale;
+  const t = getDictionary(locale);
   const item = news.find((article) => article.slug === slug);
   if (!item) notFound();
 
@@ -55,10 +60,10 @@ export default async function ArticlePage({
           </p>
         ))}
         <Link
-          href="/actualites"
+          href={localizePath(locale, "/actualites")}
           className="mt-12 inline-block text-[11px] uppercase tracking-nav underline decoration-gold underline-offset-8"
         >
-          Toutes les actualités
+          {t.news.title}
         </Link>
       </article>
     </main>

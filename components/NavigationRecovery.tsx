@@ -4,19 +4,21 @@ import { useEffect } from "react";
 
 /**
  * Après un déploiement Vercel, la navigation client peut échouer
- * (chunks JS obsolètes). On force un rechargement propre une fois.
+ * (chunks JS / payload RSC obsolètes). Rechargement propre une fois.
  */
 export function NavigationRecovery() {
   useEffect(() => {
-    const FLAG = "degavre-chunk-reload";
+    const FLAG = "degavre-nav-reload";
 
     function shouldReload(message: string) {
       return (
-        /Loading chunk [\w-]+ failed/i.test(message) ||
+        /Loading chunk [\w.-]+ failed/i.test(message) ||
         /ChunkLoadError/i.test(message) ||
         /Failed to fetch RSC payload/i.test(message) ||
         /Failed to load chunk/i.test(message) ||
-        /dynamically imported module/i.test(message)
+        /dynamically imported module/i.test(message) ||
+        /error loading rsc/i.test(message) ||
+        /FetchEvent timed out/i.test(message)
       );
     }
 
@@ -43,10 +45,9 @@ export function NavigationRecovery() {
     window.addEventListener("error", onError);
     window.addEventListener("unhandledrejection", onRejection);
 
-    // Si on a déjà rechargé avec succès, on efface le drapeau
     const clear = window.setTimeout(() => {
       sessionStorage.removeItem(FLAG);
-    }, 4000);
+    }, 5000);
 
     return () => {
       window.clearTimeout(clear);

@@ -2,25 +2,46 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { news } from "@/lib/content";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { isLocale, localizePath, type Locale } from "@/lib/i18n/config";
+import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Actualités",
-  description: "Vendanges, cuvées et vie de la ferme Degavre à Ostiches.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  if (!isLocale(raw)) return {};
+  const t = getDictionary(raw);
+  return { title: t.news.title, description: t.news.subtitle };
+}
 
-export default function ActualitesPage() {
+export default async function ActualitesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  if (!isLocale(raw)) notFound();
+  const locale = raw as Locale;
+  const t = getDictionary(locale);
+
   return (
     <main>
       <PageHero
-        title="Actualités"
-        subtitle="La vie du vignoble, des vendanges aux premières bulles."
+        title={t.news.title}
+        subtitle={t.news.subtitle}
         image="/photos/vendanges.jpg"
-        alt="Vendanges"
+        alt={t.news.title}
       />
       <section className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2">
         {news.map((item) => (
           <article key={item.slug}>
-            <Link href={`/actualites/${item.slug}`} className="group block">
+            <Link
+              href={localizePath(locale, `/actualites/${item.slug}`)}
+              className="group block"
+            >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
                   src={item.image}
