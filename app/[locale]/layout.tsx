@@ -5,6 +5,7 @@ import { RightRail } from "@/components/RightRail";
 import { Providers } from "@/components/Providers";
 import { CookieBanner } from "@/components/CookieBanner";
 import { LegalBanner } from "@/components/LegalBanner";
+import { NavigationRecovery } from "@/components/NavigationRecovery";
 import { HtmlLang } from "@/components/HtmlLang";
 import { LocaleProvider } from "@/lib/i18n/locale-context";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -30,6 +31,7 @@ export default async function LocaleLayout({
     <Providers>
       <LocaleProvider locale={locale}>
         <HtmlLang locale={locale} />
+        <NavigationRecovery />
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-paper focus:px-4 focus:py-2"
