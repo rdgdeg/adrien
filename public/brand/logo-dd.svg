@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+  <!-- Monogramme Degavre : deux D entrelacés -->
+  <path
+    fill="currentColor"
+    d="M28 18h28c16.5 0 28 11.2 28 28.5S72.5 75 56 75H44V92H28V18Zm16 16v25h10c8.2 0 13.5-5.4 13.5-13.8S62.2 34 54 34H44Z"
+  />
+  <path
+    fill="currentColor"
+    d="M52 42h28c16.5 0 28 11.2 28 28.5S96.5 99 80 99H68V116H52V42Zm16 16v25h10c8.2 0 13.5-5.4 13.5-13.8S78.2 58 70 58H68V58h-2Z"
+  />
+</svg>

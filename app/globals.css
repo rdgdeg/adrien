@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #faf8f4;
+  --paper-deep: #f3efe6;
+  --ink: #1a1816;
+  --ink-soft: #4a4640;
+  --line: #ddd6c8;
+  --moss: #5f7a62;
+  --moss-deep: #3f5544;
+  --gold: #b79a62;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-moss: var(--moss);
+  --color-moss-deep: var(--moss-deep);
+  --color-gold: var(--gold);
+  --font-sans: var(--font-degavre-sans);
+  --font-serif: var(--font-degavre-serif);
+  --font-script: var(--font-degavre-script);
+  --font-body: var(--font-degavre-body);
+  --font-display: var(--font-degavre-display);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-degavre-body), Georgia, "Times New Roman", serif;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+body::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--moss);
+  color: white;
+}
+
+.font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-script {
+  font-family: var(--font-script), cursive;
+}
+
+.font-sans {
+  font-family: var(--font-sans), sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), "Bodoni MT", Didot, Georgia, serif;
+}
+
+.tracking-label {
+  letter-spacing: 0.14em;
+}
+
+.tracking-nav {
+  letter-spacing: 0.18em;
+}
+
+.tracking-logo {
+  letter-spacing: 0.32em;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 36s linear infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes splash-out {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.splash-exit {
+  animation: splash-out 1.8s ease forwards;
+}
+
+@keyframes splash-breathe {
+  0%,
+  100% {
+    opacity: 0.06;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.09;
+    transform: scale(1.015);
+  }
+}
+
+.splash-watermark {
+  animation: splash-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes hero-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-slide-copy {
+  animation: hero-slide-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.kenburns {
+  animation: kenburns 22s ease-out forwards;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.menu-col {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.menu-ready .menu-col {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.menu-ready .menu-col:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.menu-ready .menu-col:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.menu-ready .menu-col:nth-child(3) {
+  animation-delay: 0.19s;
+}
+.menu-ready .menu-col:nth-child(4) {
+  animation-delay: 0.26s;
+}
+.menu-ready .menu-col:nth-child(5) {
+  animation-delay: 0.33s;
+}
+.menu-ready .menu-col:nth-child(6) {
+  animation-delay: 0.4s;
+}
+.menu-ready .menu-col:nth-child(7) {
+  animation-delay: 0.47s;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
