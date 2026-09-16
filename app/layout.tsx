@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import {
   Bodoni_Moda,
   Cormorant_Garamond,
@@ -40,7 +39,8 @@ const script = Pinyon_Script({
   weight: "400",
 });
 
-const splashBootScript = `(function(){try{if(localStorage.getItem('degavre-splash-seen')){document.documentElement.classList.add('splash-seen','splash-done');}}catch(e){}})();`;
+/** Exécuté avant le paint si le splash a déjà été vu. */
+const splashBootScript = `(function(){try{if(localStorage.getItem("degavre-splash-seen")){document.documentElement.classList.add("splash-seen");}}catch(e){}})();`;
 
 export const metadata: Metadata = {
   title: {
@@ -58,19 +58,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${sans.variable} ${body.variable} ${serif.variable} ${display.variable} ${script.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: splashBootScript }}
+        />
+      </head>
       <body
         className="min-h-full bg-paper text-ink"
         suppressHydrationWarning
       >
-        <Script
-          id="splash-boot"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: splashBootScript }}
-        />
-        {/* Couvre le site dès le HTML, avant React — masqué si déjà vu */}
+        {/* Écran logo dès le HTML — retiré par React après hydratation */}
         <div
           id="boot-splash"
-          data-splash-root
           className="fixed inset-0 z-[100] flex items-center justify-center bg-paper"
           aria-hidden="true"
         >

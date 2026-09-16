@@ -115,21 +115,17 @@ body::after {
 }
 
 @keyframes splash-out {
-  0% {
-    opacity: 1;
-    visibility: visible;
-  }
-  65% {
+  from {
     opacity: 1;
   }
-  100% {
+  to {
     opacity: 0;
-    visibility: hidden;
   }
 }
 
 .splash-exit {
-  animation: splash-out 1.8s ease forwards;
+  animation: splash-out 0.9s ease forwards;
+  pointer-events: none;
 }
 
 @keyframes splash-breathe {
@@ -148,9 +144,8 @@ body::after {
   animation: splash-breathe 2.8s ease-in-out infinite;
 }
 
-/* Visiteurs déjà venus : pas de flash splash avant hydratation */
-html.splash-seen [data-splash-root],
-html.splash-done #boot-splash {
+/* Déjà vu : masquer le splash HTML avant React */
+html.splash-seen #boot-splash {
   display: none !important;
 }
 
