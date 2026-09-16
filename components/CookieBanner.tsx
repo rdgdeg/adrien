@@ -32,18 +32,20 @@ export function CookieBanner() {
     setConsentNeeded(false);
   }
 
-  // Pas de cookies pendant le splash ; uniquement une fois le site révélé
   if (!splashReady || !consentNeeded) return null;
 
   return (
     <div
       data-cookie-banner
-      className="fixed bottom-4 left-4 z-[90] w-[min(100%-2rem,420px)] border border-line bg-paper p-5 shadow-2xl animate-fade-up"
+      className="fixed inset-x-3 z-[90] border border-line bg-paper p-4 shadow-2xl animate-fade-up sm:inset-x-auto sm:left-4 sm:w-[min(100%-2rem,420px)] sm:p-5"
+      style={{
+        bottom: "calc(4.75rem + env(safe-area-inset-bottom, 0px))",
+      }}
     >
-      <p className="text-[13px] font-semibold uppercase tracking-nav">
+      <p className="text-[12px] font-semibold uppercase tracking-nav sm:text-[13px]">
         {t.cookies.title}
       </p>
-      <p className="mt-3 text-base leading-relaxed text-ink-soft">
+      <p className="mt-2 text-sm leading-relaxed text-ink-soft sm:mt-3 sm:text-base">
         {t.cookies.text}{" "}
         <Link
           href={localizePath(locale, "/confidentialite")}
@@ -54,7 +56,7 @@ export function CookieBanner() {
       </p>
 
       {customize && (
-        <div className="mt-4 space-y-3 text-base">
+        <div className="mt-4 space-y-3 text-sm sm:text-base">
           <label className="flex items-start gap-3">
             <input type="checkbox" checked disabled className="mt-1" />
             {t.cookies.necessary}
@@ -80,10 +82,10 @@ export function CookieBanner() {
         </div>
       )}
 
-      <div className="mt-5 grid grid-cols-3 gap-2 text-[12px] uppercase tracking-nav">
+      <div className="mt-4 grid grid-cols-1 gap-2 text-[11px] uppercase tracking-nav sm:mt-5 sm:grid-cols-3 sm:text-[12px]">
         <button
           type="button"
-          className="border border-line px-2 py-2 hover:bg-paper-deep"
+          className="min-h-11 border border-line px-2 py-2.5 hover:bg-paper-deep"
           onClick={() =>
             save({ necessary: true, analytics: false, marketing: false })
           }
@@ -92,14 +94,14 @@ export function CookieBanner() {
         </button>
         <button
           type="button"
-          className="border border-line px-2 py-2 hover:bg-paper-deep"
+          className="min-h-11 border border-line px-2 py-2.5 hover:bg-paper-deep"
           onClick={() => setCustomize((value) => !value)}
         >
           {customize ? t.cookies.save : t.cookies.customize}
         </button>
         <button
           type="button"
-          className="bg-ink px-2 py-2 text-paper hover:bg-moss-deep"
+          className="min-h-11 bg-ink px-2 py-2.5 text-paper hover:bg-moss-deep"
           onClick={() => {
             if (customize) {
               save({ necessary: true, analytics, marketing });

@@ -10,16 +10,16 @@ export function LegalBanner() {
 
   return (
     <aside
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-[80]"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[80] pb-[env(safe-area-inset-bottom,0px)]"
       aria-label={t.shop.legalMentions}
     >
-      <div className="pointer-events-auto border-t border-white/15 bg-ink px-4 py-2.5 text-center text-[11px] leading-snug tracking-wide text-paper/95 md:px-6 md:text-[12px]">
-        <p className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-1 sm:flex-row sm:flex-wrap sm:gap-x-3 sm:gap-y-1">
+      <div className="pointer-events-auto border-t border-white/15 bg-ink px-3 py-2 text-center text-[10px] leading-snug tracking-wide text-paper/95 sm:px-4 sm:py-2.5 sm:text-[11px] md:px-6 md:text-[12px]">
+        <p className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-0.5 sm:flex-row sm:flex-wrap sm:gap-x-3 sm:gap-y-1">
           <span>{t.shop.legalAge}</span>
           <span className="hidden text-paper/35 sm:inline" aria-hidden>
             |
           </span>
-          <span>{t.shop.legalAbuse}</span>
+          <span className="max-sm:line-clamp-2">{t.shop.legalAbuse}</span>
           <span className="hidden text-paper/35 sm:inline" aria-hidden>
             |
           </span>

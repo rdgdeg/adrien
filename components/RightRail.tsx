@@ -33,7 +33,7 @@ export function RightRail() {
 
   useEffect(() => {
     function onScroll() {
-      setShowTop(window.scrollY > 320);
+      setShowTop(window.scrollY > 280);
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -49,12 +49,12 @@ export function RightRail() {
 
   return (
     <>
-      {/* Onglet visite + panier — même largeur, espacement régulier */}
-      <div className="fixed top-1/2 right-0 z-40 flex w-14 -translate-y-1/2 flex-col gap-2">
+      {/* Visite + panier : desktop */}
+      <div className="fixed top-1/2 right-0 z-40 hidden w-14 -translate-y-1/2 flex-col gap-2 md:flex">
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="hidden min-h-[7.5rem] w-full items-center justify-center border border-line border-r-0 bg-paper-deep py-6 font-sans text-[10px] font-medium uppercase leading-tight tracking-nav text-ink shadow-sm transition-colors hover:bg-paper md:flex"
+          className="flex min-h-[7.5rem] w-full items-center justify-center border border-line border-r-0 bg-paper-deep py-6 font-sans text-[10px] font-medium uppercase leading-tight tracking-nav text-ink shadow-sm transition-colors hover:bg-paper"
           style={{ writingMode: "vertical-rl" }}
         >
           {t.ui.visitTab}
@@ -74,16 +74,28 @@ export function RightRail() {
         </Link>
       </div>
 
-      {/* Remonter en haut — bas droite, au-dessus du bandeau légal */}
+      {/* Visite : onglet compact mobile (panier déjà dans le header) */}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="fixed top-1/2 right-0 z-40 flex max-h-[40vh] -translate-y-1/2 items-center justify-center border border-line border-r-0 bg-paper-deep px-2 py-5 font-sans text-[9px] font-medium uppercase tracking-nav text-ink shadow-sm md:hidden"
+        style={{ writingMode: "vertical-rl" }}
+      >
+        {t.ui.visitTab}
+      </button>
+
       <button
         type="button"
         aria-label={t.ui.backToTop}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`fixed right-0 bottom-16 z-40 flex h-12 w-14 items-center justify-center border border-line border-r-0 bg-paper-deep text-ink shadow-sm transition-all duration-300 hover:bg-paper md:bottom-[3.25rem] ${
+        className={`fixed right-2 z-40 flex h-11 w-11 items-center justify-center border border-line bg-paper-deep text-ink shadow-sm transition-all duration-300 hover:bg-paper md:right-0 md:h-12 md:w-14 md:border-r-0 ${
           showTop
-            ? "translate-x-0 opacity-100"
-            : "pointer-events-none translate-x-4 opacity-0"
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-2 opacity-0"
         }`}
+        style={{
+          bottom: "calc(5.5rem + env(safe-area-inset-bottom, 0px))",
+        }}
       >
         <span className="text-lg leading-none" aria-hidden>
           ↑
@@ -91,31 +103,35 @@ export function RightRail() {
       </button>
 
       <div
-        className={`fixed inset-y-0 right-0 z-[60] w-[min(100%,28rem)] border-l border-line bg-paper shadow-2xl transition-transform duration-500 ${
+        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md border-l border-line bg-paper shadow-2xl transition-transform duration-500 sm:w-[min(100%,28rem)] ${
           open ? "translate-x-0" : "pointer-events-none translate-x-full"
         }`}
         aria-hidden={!open}
       >
-        <div className="flex h-full flex-col px-10 py-12">
+        <div className="flex h-full flex-col overflow-y-auto px-6 py-10 pb-24 sm:px-10 sm:py-12">
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="self-end font-sans text-[11px] font-medium uppercase tracking-nav text-ink-soft hover:text-ink"
+            className="min-h-11 self-end px-2 font-sans text-[11px] font-medium uppercase tracking-nav text-ink-soft hover:text-ink"
           >
             {t.ui.close}
           </button>
-          <p className="mt-10 font-script text-2xl text-moss">Ostiches</p>
-          <h2 className="font-display text-4xl font-semibold uppercase tracking-label">
+          <p className="mt-6 font-script text-2xl text-moss sm:mt-10">
+            Ostiches
+          </p>
+          <h2 className="font-display text-3xl font-semibold uppercase tracking-label sm:text-4xl">
             {t.rail.title}
           </h2>
-          <p className="mt-4 text-ink-soft">{t.rail.text}</p>
-          <ul className="mt-10 space-y-1">
+          <p className="mt-4 text-base text-ink-soft sm:text-[1.125rem]">
+            {t.rail.text}
+          </p>
+          <ul className="mt-8 space-y-1 sm:mt-10">
             {visitActions.map((action) => (
               <li key={action.href}>
                 <Link
                   href={localizePath(locale, action.href)}
                   onClick={() => setOpen(false)}
-                  className="block border-b border-line py-4 font-serif text-2xl italic transition-colors hover:text-moss"
+                  className="block border-b border-line py-4 font-serif text-xl italic transition-colors hover:text-moss sm:text-2xl"
                 >
                   {action.label}
                 </Link>

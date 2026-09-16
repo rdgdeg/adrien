@@ -38,7 +38,7 @@ export default async function LocaleLayout({
         </a>
         <Header />
         <RightRail />
-        <div id="contenu" className="pb-16 md:pb-14">
+        <div id="contenu" className="pb-28 md:pb-16">
           {children}
         </div>
         <Footer />

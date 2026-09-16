@@ -51,6 +51,12 @@ export const metadata: Metadata = {
     "Domaine viticole familial à Ostiches, au Pays des Collines. AOP Crémant de Wallonie, ferme de Martincamps depuis 1772.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover" as const,
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html

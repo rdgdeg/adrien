@@ -39,8 +39,15 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-degavre-body), Georgia, "Times New Roman", serif;
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
 }
 
 body::after {

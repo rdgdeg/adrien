@@ -76,19 +76,19 @@ export function MenuOverlay({
       }`}
       aria-hidden={!open}
     >
-      <div className="mx-auto flex h-full max-w-6xl flex-col overflow-y-auto px-6 pb-14 pt-28 md:px-12 md:pb-16 md:pt-32 lg:max-w-7xl">
-        <div className="mb-8 flex justify-end sm:hidden">
+      <div className="mx-auto flex h-full max-w-6xl flex-col overflow-y-auto px-5 pb-28 pt-24 sm:px-6 md:px-12 md:pb-16 md:pt-32 lg:max-w-7xl">
+        <div className="mb-6 flex justify-end sm:mb-8 sm:hidden">
           <LanguageSwitcher />
         </div>
         <div
-          className={`grid gap-x-8 gap-y-10 sm:grid-cols-2 md:gap-x-10 md:gap-y-12 lg:grid-cols-4 ${open ? "menu-ready" : ""}`}
+          className={`grid gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 md:gap-x-10 md:gap-y-12 lg:grid-cols-4 ${open ? "menu-ready" : ""}`}
         >
           {items.map((item) => (
             <div key={item.href} className="menu-col">
               <Link
                 href={localizePath(locale, item.href)}
                 onClick={onClose}
-                className="font-serif text-[2rem] leading-tight italic text-ink transition-colors hover:text-moss md:text-[2.25rem]"
+                className="font-serif text-[1.65rem] leading-tight italic text-ink transition-colors hover:text-moss sm:text-[2rem] md:text-[2.25rem]"
               >
                 {item.label}
               </Link>
