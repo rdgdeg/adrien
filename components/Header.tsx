@@ -9,6 +9,27 @@ import { useCart } from "@/lib/cart";
 import { useLocale } from "@/lib/i18n/locale-context";
 import { localizePath } from "@/lib/i18n/config";
 
+function HomeIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path
+        d="M4 11.5 12 4l8 7.5"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7 10.5V20h10v-9.5"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function ShopBagIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
@@ -44,7 +65,15 @@ export function Header() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-line/60 bg-paper/96 backdrop-blur-sm">
         <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 py-3 md:gap-6 md:px-10 md:py-4">
-          <div className="flex items-center gap-4 justify-self-start md:gap-6">
+          <div className="flex items-center gap-3 justify-self-start md:gap-5">
+            <Link
+              href={localizePath(locale, "/")}
+              aria-label={t.ui.home}
+              className="inline-flex items-center text-ink transition-colors hover:text-moss"
+              onClick={() => setOpen(false)}
+            >
+              <HomeIcon className="h-[17px] w-[17px]" />
+            </Link>
             <button
               type="button"
               className="flex items-center gap-2.5 text-ink"

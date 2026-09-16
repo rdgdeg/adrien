@@ -20,6 +20,7 @@ export const nl: Dictionary = {
     newsPrev: "Vorig nieuws",
     newsNext: "Volgend nieuws",
     backToTop: "Terug naar boven",
+    home: "Home",
   },
   nav: {
     pro: "Professionals",

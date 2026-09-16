@@ -19,6 +19,7 @@ export type Dictionary = {
     newsPrev: string;
     newsNext: string;
     backToTop: string;
+    home: string;
   };
   nav: {
     pro: string;
@@ -320,6 +321,7 @@ export const fr: Dictionary = {
     newsPrev: "Actualités précédentes",
     newsNext: "Actualités suivantes",
     backToTop: "Haut de page",
+    home: "Accueil",
   },
   nav: {
     pro: "Professionnels",

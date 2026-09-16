@@ -49,12 +49,12 @@ export function RightRail() {
 
   return (
     <>
-      {/* Onglet visite + panier, centrés verticalement à droite */}
-      <div className="fixed top-1/2 right-0 z-40 flex -translate-y-1/2 flex-col items-end">
+      {/* Onglet visite + panier — même largeur, espacement régulier */}
+      <div className="fixed top-1/2 right-0 z-40 flex w-14 -translate-y-1/2 flex-col gap-2">
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="hidden border border-line border-r-0 border-b-0 bg-paper-deep px-2.5 py-10 font-sans text-[12px] font-medium uppercase tracking-nav text-ink shadow-sm transition-colors hover:bg-paper md:block"
+          className="hidden min-h-[7.5rem] w-full items-center justify-center border border-line border-r-0 bg-paper-deep py-6 font-sans text-[10px] font-medium uppercase leading-tight tracking-nav text-ink shadow-sm transition-colors hover:bg-paper md:flex"
           style={{ writingMode: "vertical-rl" }}
         >
           {t.ui.visitTab}
@@ -63,7 +63,7 @@ export function RightRail() {
         <Link
           href={localizePath(locale, "/boutique/panier")}
           aria-label={t.ui.cart}
-          className="relative flex h-14 w-14 items-center justify-center border border-line border-r-0 bg-ink text-paper shadow-md transition-colors hover:bg-ink-soft"
+          className="relative flex h-14 w-full items-center justify-center border border-line border-r-0 bg-ink text-paper shadow-md transition-colors hover:bg-ink-soft"
         >
           <ShoppingBagIcon className="h-6 w-6" />
           {count > 0 && (
@@ -79,7 +79,7 @@ export function RightRail() {
         type="button"
         aria-label={t.ui.backToTop}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`fixed right-0 bottom-16 z-40 flex h-12 w-12 items-center justify-center border border-line border-r-0 bg-paper-deep text-ink shadow-sm transition-all duration-300 hover:bg-paper md:bottom-[3.25rem] ${
+        className={`fixed right-0 bottom-16 z-40 flex h-12 w-14 items-center justify-center border border-line border-r-0 bg-paper-deep text-ink shadow-sm transition-all duration-300 hover:bg-paper md:bottom-[3.25rem] ${
           showTop
             ? "translate-x-0 opacity-100"
             : "pointer-events-none translate-x-4 opacity-0"

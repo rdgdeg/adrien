@@ -20,6 +20,7 @@ export const en: Dictionary = {
     newsPrev: "Previous news",
     newsNext: "Next news",
     backToTop: "Back to top",
+    home: "Home",
   },
   nav: {
     pro: "Trade",
